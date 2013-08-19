@@ -1,0 +1,11 @@
+mysql-python
+Django
+South
+unipath
+distribute
+python-openid
+django-userena
+easy-thumbnails
+django-guardian
+django-reversion
+PIL

@@ -1,0 +1,18 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{% trans "Signup almost done!" %}{% endblock %}
+
+{% block content_title %}<h2>{% trans "Signup" %}</h2>{% endblock %}
+
+{% block content %}
+<p>{% trans "Thank you for signing up with us!" %}</p>
+
+{% if userena_activation_required %}
+<p>{% blocktrans %}You have been sent an e-mail with an activation link to the supplied email. To activate your account, please click on the link in this email.{% endblocktrans %}</p>
+<p>{% blocktrans %}This link will be active for {{ userena_activation_days }} days. {% endblocktrans %}</p>
+{% else  %}
+<p><a href="{% url 'userena_profile_edit' user.username %}">{% blocktrans %}Please click here to edit your profile.{% endblocktrans %}</a></p>
+{% endif %}
+{% endblock %}

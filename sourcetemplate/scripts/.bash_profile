@@ -1,0 +1,17 @@
+export PATH=$HOME/private-python/bin:$PATH
+. /home/am/amvoliman.com/private-python/bin/virtualenvwrapper.sh
+alias ll="ls -al"
+alias cdproj="cd ~/projects/av4repo/av4/"
+alias cdtemplates="cd ~/projects/av4repo/av4/templates/"
+alias run="django-admin.py runserver --settings=av4.settings.production"
+alias syncdb="django-admin.py syncdb --settings=av4.settings.production"
+alias migrate="django-admin.py migrate --settings=av4.settings.production"
+alias check="django-admin.py check_permissions --settings=av4.settings.production"
+alias nanodispatch="nano ~/html/dispatch.fcgi"
+alias nanohtaccess="nano ~/html/.htaccess"
+alias nanobash="nano ~/.bash_profile"
+alias nanosettings="nano ~/projects/av4repo/av4/av4/settings/production.py"
+alias nanoupdate="nano ~/scripts/update_files.sh"
+alias cdsitepackages="cd /home/am/amvoliman.com/private-python/lib/python2.6/site-packages/"
+alias collectstatic="django-admin.py collectstatic --settings=av4.settings.production"
+alias updatefiles="~/scripts/update_files.sh"

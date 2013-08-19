@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% load url from future %}
+{% load humanize %}
+
+{% block content_title %}<h1>{% trans 'Contact Us' %}</h1>{% endblock %}
+
+{% block content %}
+<div class="grid_24">
+<div class="grid_12 leftupperbox alpha">
+	<h2>{% trans 'Box1' %}</h2>
+	<ul>
+	<li>{% trans 'Box 1' %}</li>
+	</ul>
+	<p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
+</div>
+<div class="grid_12 rightupperbox omega">
+	<h2>{% trans 'Box2' %}</h2>
+    <ul>
+    <li>{% trans 'Box 2' %}</li>
+    </ul>
+    <p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
+</div>
+</div>
+<div class="grid_24">
+<div class="grid_12 leftlowerbox alpha">
+	<h2>{% trans 'Box3' %}</h2>
+    <ul>
+    <li>{% trans 'Box 3' %}</li>
+    </ul>
+    <p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
+</div>
+<div class="grid_12 omega">
+</div>
+<div class="grid_12 rightlowerbox alpha">
+    <h2>{% trans 'Box3' %}</h2>
+    <ul>
+    <li>{% trans 'Box 3' %}</li>
+    </ul>
+    <p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
+</div>	
+</div>
+{% if not user.is_authenticated %}
+<div class="grid_24">
+<form class="userena" action="{% url 'userena_signup' %}" method="post">
+  {% csrf_token %}
+    <h1>{% trans 'Register' %}</h1>
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        {{ field.errors }}
+        {% comment %} Displaying checkboxes differently {% endcomment %}
+        {% if field.name == 'tos' %}
+            <p class="checkbox">
+            <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
+            </p>
+        {% else %}
+            <p>
+            {{ field.label_tag }} 
+            {{ field }}
+            </p>
+        {% endif %}
+    {% endfor %}
+  <input type="submit" value="{% trans "Signup"%}" />
+</form>
+</div>
+{% endif %}
+{% endblock %}
