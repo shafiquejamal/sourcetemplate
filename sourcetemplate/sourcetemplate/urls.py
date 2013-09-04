@@ -22,12 +22,17 @@ urlpatterns += i18n_patterns('',
     # url(r'^$', 'nr.views.home', name='home'),
     # url(r'^nr/', include('nr.foo.urls')),
     # For django-userena
+    url(r'^accounts/signin/$', 'nr.views.signin', name='userena_signin'), # These two lines override the default so that we
+    url(r'^accounts/signup/$', 'nr.views.signup', name='userena_signup'), #   can have sign up and sign in on the same page
     (r'^accounts/', include('userena.urls')), 
     url(r'^$', 'sourcetemplate.views.home', name='home'),
     # The contact form - its just a page with an email address
     url(r'^contact/$', login_required(TemplateView.as_view(template_name="contact.html")), name="contact"),
     url(r'^faq/$', TemplateView.as_view(template_name="faq.html"), name="faq"),
     url(r'^termsandconditions/$', TemplateView.as_view(template_name="termsandconditions.html"), name="termsandconditions"),
+
+    # for the django rest framework
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
