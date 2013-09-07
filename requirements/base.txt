@@ -7,5 +7,10 @@ python-openid
 django-userena
 easy-thumbnails
 django-guardian
-django-reversion
 PIL
+django-reversion
+django-mathfilters
+django-filter
+markdown
+djangorestframework
+django-widget-tweaks

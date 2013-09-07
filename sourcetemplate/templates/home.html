@@ -3,66 +3,131 @@
 {% load i18n %}
 {% load url from future %}
 {% load humanize %}
+{% load widget_tweaks %}
+{% load ifregextags %}
 
-{% block content_title %}<h1>{% trans 'Contact Us' %}</h1>{% endblock %}
+{% block title %}{% trans 'Home' %}{% endblock %}
 
 {% block content %}
-<div class="grid_24">
-<div class="grid_12 leftupperbox alpha">
-	<h2>{% trans 'Box1' %}</h2>
-	<ul>
-	<li>{% trans 'Box 1' %}</li>
-	</ul>
-	<p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
-</div>
-<div class="grid_12 rightupperbox omega">
-	<h2>{% trans 'Box2' %}</h2>
-    <ul>
-    <li>{% trans 'Box 2' %}</li>
-    </ul>
-    <p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
-</div>
-</div>
-<div class="grid_24">
-<div class="grid_12 leftlowerbox alpha">
-	<h2>{% trans 'Box3' %}</h2>
-    <ul>
-    <li>{% trans 'Box 3' %}</li>
-    </ul>
-    <p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
-</div>
-<div class="grid_12 omega">
-</div>
-<div class="grid_12 rightlowerbox alpha">
-    <h2>{% trans 'Box3' %}</h2>
-    <ul>
-    <li>{% trans 'Box 3' %}</li>
-    </ul>
-    <p><a href="{% url 'faq' %}">{% trans 'Click here to learn more.' %}</a></p>
-</div>	
-</div>
+
 {% if not user.is_authenticated %}
-<div class="grid_24">
-<form class="userena" action="{% url 'userena_signup' %}" method="post">
-  {% csrf_token %}
-    <h1>{% trans 'Register' %}</h1>
-    {{ form.non_field_errors }}
-    {% for field in form %}
-        {{ field.errors }}
-        {% comment %} Displaying checkboxes differently {% endcomment %}
-        {% if field.name == 'tos' %}
-            <p class="checkbox">
-            <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
-            </p>
-        {% else %}
-            <p>
-            {{ field.label_tag }} 
-            {{ field }}
-            </p>
-        {% endif %}
-    {% endfor %}
-  <input type="submit" value="{% trans "Signup"%}" />
-</form>
-</div>
+	<div id="about" class="pull-left">
+		{% ifnotregex "^/.*/accounts/.*/signup/complete/$" request.path %}
+        {% ifnotregex "^/.*/accounts/.*/disabled/$" request.path %}
+        {% ifnotregex "^/.*/accounts/activate/.*" request.path %}
+        {% ifnotregex "^/.*/accounts/signout/" request.path %}
+			<form class="form-inline" method="post" action="{% url 'userena_signin' %}">{% csrf_token %} 
+                {{ form_signin.non_field_errors }}
+                {{ form_signin.identification.errors }}
+                {{ form_signin.identification|add_class:"span2"|attr:"placeholder:Username" }}
+    					  <!-- <input type="text" class="span2" placeholder="Username"> -->
+                {{ form_signin.password.errors }}
+                {{ form_signin.password|add_class:"span2"|attr:"placeholder:Password" }}
+				<!--  <input type="password" class="span2" placeholder="Password"> -->
+				<button type="submit" class="btn btn-primary">{% trans 'Sign in' %}</button>
+					<ul class="inline">
+						<li><label class="checkbox">
+						  	<input type="checkbox"><small>{% trans 'Keep me logged in' %}</small>
+						</label>
+						</li>
+					<li><a href=""><small>{% trans 'Forgot your password?' %}</small></a></li>
+				</ul>
+          </form>
+        {% endifnotregex %}
+        {% endifnotregex %}
+        {% endifnotregex %}
+        {% endifnotregex %}
+	</div>
+	<div id="registration_form" class="pull-right">
+		<form class="userena" action="{% url 'userena_signup' %}" method="post">{% csrf_token %}
+			<fieldset>
+			  	{{ form_signup.non_field_errors }}
+				<legend><b>Sign Up</b></legend>
+				<label><b><small>Type your username</small></b></label>
+			  	{{ form_signup.username.errors }}
+			  	{{ form_signup.username|add_class:"span4"|attr:"placeholder:Username" }}
+			  	<label><b><small>Type your email</small></b></label>
+			  	{{ form_signup.email.errors }}
+			  	{{ form_signup.email|add_class:"span4"|attr:"placeholder:Email" }}
+				<label><b><small>Create a password</small></b></label>
+				{{ form_signup.password1.errors }}
+			  	{{ form_signup.password1|add_class:"span4"|attr:"placeholder:Password" }}
+				<label><b><small>Confirm your password</small></b></label>
+				{{ form_signup.password2.errors }}
+			  	{{ form_signup.password2|add_class:"span4"|attr:"placeholder:Confirm your password" }}
+			</fieldset>
+			<button type="submit" class="btn btn-info">Sign Up</button>
+		</form>
+	</div>
 {% endif %}
+<div class="clearfix"></div>
+<div id="about" class="pull-left">
+		<h4><p class="text-center">{%trans 'About this Site' %}</p></h4>
+		<ul>
+			<li>
+				<p class="text-left">
+					{% trans 'point1' %} 
+				</p>
+			</li>
+            <li>
+                <p>
+                    {% trans 'point2' %}
+                </p>
+            </li>
+			<li>
+				<p class="text-left">
+					{% trans 'point3' %}
+				</p>
+			</li>
+			<li>
+				<p class="text-left">
+					{% trans 'point4' %}
+				</p>
+			</li>
+	</div>
+	<div id="video_clip" class="pull-right">
+		<h4>Watch a video demo</h4>
+		<iframe width="480" height="300" src="http://www.youtube.com/embed/cou0e1HkKhI?feature=player_embedded" frameborder="0" allowfullscreen></iframe>
+	</div>
+	
+	<div id="howitworks" class="pull-right">
+		<p class="text-center"><img src="css/images/how.png" /></p>
+		<h4><p class="text-center">{% trans 'How it Works' %}</p></h4>
+		<ul>
+			<li>
+				<p class="text-left">{% trans 'point1' %}
+				</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'point2' %}</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'point3' %}</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'point4' %}</p>
+			</li>
+		</ul>
+	</div>
+	<div class="clearfix"></div>
+	
+	<div id="screenshots">
+		<table class="table table-bordered">
+			<tr>
+				<td>
+					<p class="text-center"><a href="https://github.com/shafiquejamal/socialassistanceregistry"><img src="css/images/download.png" /></a></p>
+					<h4 class="text-center">{% trans 'Donate!' %}</h4>
+				</td>
+				<td>
+					<p class="text-center"><a href=""><img src="css/images/comment.png" /></a></p>
+					<h4 class="text-center">{% trans 'Question? Comments?' %}</h4>
+					<p class="text-center"> {% trans 'Email <a href="">shafique.jamal@gmail.com' %}</a></p>
+				</td>
+				<td>
+					<p class="text-center"><a href="https://github.com/shafiquejamal/socialassistanceregistry"><img src="css/images/download.png" /></a></p>
+					<h4 class="text-center">{% trans 'Donate!' %}</h4>
+				</td>
+			</tr>
+		</table>
+	</div>
 {% endblock %}

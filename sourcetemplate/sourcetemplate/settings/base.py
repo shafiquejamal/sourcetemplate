@@ -181,6 +181,8 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'accounts',
+    'widget_tweaks',
+    'rest_framework',
 )
 
 # A sample logging configuration. The only tangible logging
