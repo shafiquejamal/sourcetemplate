@@ -1,7 +1,7 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
 {% load url from future %}
-
+{% load widget_tweaks %}
 {% block title %}{% trans "Login" %}{% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
       {% else %}
         <p>
         {{ field.label_tag }}
-        {{ field }}
+        {{ field|add_class:"span4"}}
         </p>
       {% endif %}
     {% endfor %}

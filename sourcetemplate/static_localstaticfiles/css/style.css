@@ -106,7 +106,8 @@
 		}
 
 #about {
-	width:450px;
+	width:400px;
+	margin-top:25px;
 }
 
 #registration_form form {
@@ -123,13 +124,17 @@
 }
 
 #howitworks {
-	height:410px;
+	height:200px;
 	margin-top:25px;
 	width:400px;
 }
 
 #screenshots td {
 	width:300px;
+}
+
+#screenshots {
+	margin-top: 25px;
 }
 
 #edit_form {

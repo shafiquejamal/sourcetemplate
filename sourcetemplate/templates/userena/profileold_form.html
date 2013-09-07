@@ -1,25 +1,16 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
 {% load url from future %}
-{% load staticfiles %}
 
 {% block title %}{% trans "Account setup" %}{% endblock %}
 
 {% block content_title %}<h2>{% blocktrans with profile.user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
 
 {% block content %}
-<div class="row pull-left">
-  <div class="col-lg-3">
-    <div class="thumbnail">
-      <img src="{% static "css/images/profile.jpg" %}" style="width: 300px; height: 200px;">
-    </div>
-   </div>
-</div>
 
 <form class="userena" action="" enctype="multipart/form-data" method="post">
   {% csrf_token %}
-    <div id="edit_form" class="pull-right">
-      <legend><b>{% trans "Edit Profile" %}</b></legend>
+    <h1>{% trans "Edit Profile" %}</h1>
     {{ form.as_p }}
   <input type="submit" value="{% trans "Save changes" %}" />
 </form>

@@ -5,5 +5,6 @@
 {% block content_title %}<h2>{% trans "Your account has been disabled" %}</h2>{% endblock %}
 {% block content %}
 <p>{% trans "It seems your account has been disabled." %}</p>
-<p>{% trans "If you feel that injustice has been done to you, feel free to contact the administrators to find out why" %}</p>
+<p>{% trans "If you feel that injustice has been done to you, feel free to contact the administrators to find out why." %}</p>
+<p><a href="{% url 'home' %}">{% trans "Click here to go to the home page." %}</a></p>
 {% endblock %} 
